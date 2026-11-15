@@ -11,6 +11,9 @@ __pycache__/
 # Local configuration
 .env
 
+# Local working notes (references private-repo secret locations; not for publishing)
+plan.md
+
 # Mail dumps and extracts the backend writes at runtime (real mailbox contents)
 backend/*.json
 backend/*.csv
