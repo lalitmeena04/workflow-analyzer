@@ -1,0 +1,20 @@
+# Python
+venv/
+.venv/
+__pycache__/
+*.pyc
+
+# Editors
+.idea/
+.vscode/
+
+# Local configuration
+.env
+
+# Mail dumps and extracts the backend writes at runtime (real mailbox contents)
+backend/*.json
+backend/*.csv
+
+# OS
+Thumbs.db
+.DS_Store

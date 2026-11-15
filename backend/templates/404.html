@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   	<link rel="icon" type="image/png" href="/static/resources/favicon.png" />
+    <title>ERROR 404</title>
+	<style>
+		html
+		{
+			height: 100%
+		}
+		body
+		{
+			background-color: #000;
+			height: 100%;
+			background-repeat: no-repeat;
+			background-attachment: fixed;
+		}
+		#typer
+		{
+			position: relative;
+			top: 50%;
+			transform: translateY(-50%);
+			font-family: monospace;
+			font-size: 40px;
+			text-align: center;
+			margin: auto;
+			padding: 15px;
+			color: white;
+		}
+	</style>
+</head>
+<body>
+	<script type="text/javascript" src="/static/script/typeit/typeit.js"></script>
+
+	<!--Scripts go above this line-->
+
+	<p id='typer'></p>
+
+	<!--Scripts go below this line-->
+
+	<script>
+		new TypeIt('#typer', 
+		{
+			speed: 100,
+			startDelay: 500
+		})
+		.type('Something Was Supposed To Be Here...')
+		.pause(200)
+		.delete(36)
+		.pause(250)
+        .type('But,')
+        .delete(4)
+		.pause(250)
+		.type('Error 404: ')
+		.pause(500)
+		.type("Page Not Found...")
+		.go();
+	</script>
+</body>
+</html>
