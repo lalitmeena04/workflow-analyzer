@@ -13,6 +13,7 @@ else
 	$user = $_SESSION['name'];
 }
 $proj_name="";
+$uuid = "";
 $btnClass = "";
 if($_GET)
 {
@@ -21,8 +22,8 @@ if($_GET)
 }
 else
 {
-	$sql = "SELECT proj_name,uuid from wf_projects where status = 1 AND proj_mgr = '".$mgr."'";
-	$res = mysqli_query($link, $sql);
+	$sql = "SELECT proj_name,uuid from wf_projects where status = 1 AND proj_mgr = ?";
+	$res = wf_query($link, $sql, array($mgr));
 	if (mysqli_num_rows($res) == 1) 
 	{
 		$row = mysqli_fetch_assoc($res);
@@ -35,8 +36,8 @@ else
 }
 
 // radial
-$rad_sql = 'SELECT module, curr_progress FROM wf_module_progress WHERE log IN (SELECT max(log) FROM wf_module_progress GROUP BY module) AND proj_name = "'.$proj_name.'"';
-$result = mysqli_query($link, $rad_sql);
+$rad_sql = 'SELECT module, curr_progress FROM wf_module_progress WHERE log IN (SELECT max(log) FROM wf_module_progress GROUP BY module) AND proj_name = ?';
+$result = wf_query($link, $rad_sql, array($proj_name));
 $rad_series = array();
 $rad_label = array();
 while($rad_row_prog = mysqli_fetch_assoc($result)) {
@@ -49,8 +50,8 @@ $rad_l = json_encode($rad_label);
 
 
 // overall graph
-$ovr_sql = "SELECT DISTINCT(date(log)) AS `date`,avg(curr_progress) AS `curr_prog`, avg(exp_progress) AS `exp_prog` FROM wf_module_progress  WHERE proj_name = '".$proj_name."' group by date(log)";
-$result = mysqli_query($link, $ovr_sql);
+$ovr_sql = "SELECT DISTINCT(date(log)) AS `date`,avg(curr_progress) AS `curr_prog`, avg(exp_progress) AS `exp_prog` FROM wf_module_progress  WHERE proj_name = ? group by date(log)";
+$result = wf_query($link, $ovr_sql, array($proj_name));
 $ovr_series_c = array();
 $ovr_series_e = array();
 $ovr_date = array();
@@ -123,8 +124,8 @@ $ovr_d = json_encode($ovr_date);
 	<div class="calendar-container">
 		<div class="calendar-data">
 			<?php
-			$sql = 'SELECT subject, start_date FROM wf_calendar WHERE proj_name = "'.$proj_name.'" AND start_date = (SELECT min(start_date) FROM wf_calendar)';
-			$result = mysqli_query($link, $sql);
+			$sql = 'SELECT subject, start_date FROM wf_calendar WHERE proj_name = ? AND start_date = (SELECT min(start_date) FROM wf_calendar)';
+			$result = wf_query($link, $sql, array($proj_name));
 			while($row = mysqli_fetch_assoc($result)) {
 				echo "<p style='color:white;'>".$row['subject']."</p>";
 				echo "<p style='color:white;'>".date("F j, Y h:i", strtotime($row['start_date']))."</p><br>";
@@ -185,8 +186,8 @@ $ovr_d = json_encode($ovr_date);
 			<div style="height: inherit; overflow-x: auto;" class="col-sm-4">
 				<table class="table table-hover">
 					<?php
-					$sql = 'SELECT `to`, `frm`, `subject`, `body`, `proj_name`, `log` FROM `wf_mails` where proj_name = "'.$proj_name.'"';
-					$res = mysqli_query($link, $sql);
+					$sql = 'SELECT `to`, `frm`, `subject`, `body`, `proj_name`, `log` FROM `wf_mails` where proj_name = ?';
+					$res = wf_query($link, $sql, array($proj_name));
 					if (mysqli_num_rows($res) > 0)
 					{
 						$i = 0;
@@ -209,11 +210,11 @@ $ovr_d = json_encode($ovr_date);
 		<div id="status-container" class="hide">
 			<p style="align-self: center; margin: 150px;">
 				<?php
-				$sql = 'SELECT score, log FROM wf_sentiments WHERE proj_name = "'.$proj_name.'" AND log = (SELECT max(log) FROM wf_sentiments WHERE proj_name = "'.$proj_name.'")';
-				$res = mysqli_query($link, $sql);
+				$sql = 'SELECT score, log FROM wf_sentiments WHERE proj_name = ? AND log = (SELECT max(log) FROM wf_sentiments WHERE proj_name = ?)';
+				$res = wf_query($link, $sql, array($proj_name, $proj_name));
 
-				$sql_2 = "SELECT status FROM wf_projects WHERE proj_name = '".$proj_name."'";
-				$res_2 = mysqli_query($link, $sql_2);
+				$sql_2 = "SELECT status FROM wf_projects WHERE proj_name = ?";
+				$res_2 = wf_query($link, $sql_2, array($proj_name));
 				if(mysqli_num_rows($res_2) == 1) {
 					$row_2 = mysqli_fetch_assoc($res_2);
 					if($row_2['status'] == 0) {
@@ -354,8 +355,8 @@ $ovr_d = json_encode($ovr_date);
 				<div style="overflow: auto; min-height: 500px; max-height: 500px;" class="modal-body">
 					<table class="table table-hover w-100">
 						<?php
-						$sql="SELECT name, email FROM wf_emails where proj_name = (SELECT proj_name FROM wf_projects WHERE status = 1 && proj_mgr = '" . $_SESSION['email'] . "')";
-						$result = mysqli_query($link,$sql);
+						$sql="SELECT name, email FROM wf_emails where proj_name = (SELECT proj_name FROM wf_projects WHERE status = 1 && proj_mgr = ?)";
+						$result = wf_query($link, $sql, array($_SESSION['email']));
 						if (mysqli_num_rows($result) > 0) {
 							echo "<tr><th>Name</th><th>Email</th></tr>";
 							while($row = mysqli_fetch_array($result)) {
@@ -387,8 +388,8 @@ $ovr_d = json_encode($ovr_date);
 				<div style="overflow: auto; min-height: 500px; max-height: 500px;" class="modal-body">
 					<table class="table table-hover w-100">
 						<?php
-						$sql="SELECT * FROM wf_projects where proj_mgr ='" . $_SESSION['email'] . "' && status = 0";
-						$result = mysqli_query($link,$sql);
+						$sql="SELECT * FROM wf_projects where proj_mgr = ? && status = 0";
+						$result = wf_query($link, $sql, array($_SESSION['email']));
 						if (mysqli_num_rows($result) > 0)
 						{
 							echo "<tr><th>Project Name</th><th>Start Date</th><th>End Date</th><th>Status</th></tr>";
@@ -426,7 +427,7 @@ $ovr_d = json_encode($ovr_date);
 			{            
 				$.ajax(
 				{
-					url:"php/addstaff.php",
+					url:"php/addStaff.php",
 					method:"POST",
 					data:$('#add_name').serialize(),
 					success:function(data)
@@ -436,7 +437,7 @@ $ovr_d = json_encode($ovr_date);
 							{
 								$.ajax({
 									type: "GET",
-									url: "https://consent-workflow-analyzer.azurewebsites.net/sendmail/",
+									url: <?php echo json_encode(CONSENT_URL . "/sendmail/", JSON_UNESCAPED_SLASHES);?>,
 									data: {
 										email: <?php echo "'".$mgr."'";?>,
 										uuid: <?php echo "'".$uuid."'";?>,
@@ -466,7 +467,7 @@ $ovr_d = json_encode($ovr_date);
 					{
 						if (data == 'success') 
 						{
-							window.location.href = "https://consent-workflow-analyzer.azurewebsites.net/man_consent/";
+							window.location.href = <?php echo json_encode(CONSENT_URL . "/man_consent/", JSON_UNESCAPED_SLASHES);?>;
 						} 
 						else
 						{

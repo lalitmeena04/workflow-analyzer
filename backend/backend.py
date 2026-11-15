@@ -10,3 +10,5 @@ def start_backend():
     mailsentimentanalysis.start()
 
 
+if __name__ == '__main__':
+    start_backend()

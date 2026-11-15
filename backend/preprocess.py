@@ -83,8 +83,9 @@ def start():
                                                                                                      receivedDateTime,
                                                                                                      subject)
                                     cursor.execute(sqlquery)
-                                    db.commit()
-    db.close()
+                                    cnx.commit()
+    cnx.close()
 
 
-start()
+if __name__ == '__main__':
+    start()

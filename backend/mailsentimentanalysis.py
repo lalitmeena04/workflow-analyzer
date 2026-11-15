@@ -37,4 +37,7 @@ def start():
 
 
     mail_analyzer()
-start()
+
+
+if __name__ == '__main__':
+    start()

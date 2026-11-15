@@ -1,9 +1,10 @@
 <?php
 	// Checking if user is already logged in then redirect to home page
 require_once 'config.php';
+session_start();
 if(isset($_SESSION['email']) || !empty($_SESSION['email']))
 {
-	header("location: home.php");
+	header("location: ../home.php");
 	exit;
 }
 if($_SERVER["REQUEST_METHOD"] == "POST")

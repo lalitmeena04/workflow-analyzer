@@ -6,6 +6,8 @@
 -- The progress figures are the real (non-personal) numbers recorded while
 -- the project tracked its own development in April 2019.
 
+SET sql_mode = 'NO_AUTO_VALUE_ON_ZERO';
+
 -- bcrypt hash of the word "password"
 INSERT INTO `wf_user` (`username`, `password`, `name`) VALUES
 ('demo@example.com', '$2y$10$92IXUNpkjO0rOQ5byMi.Ye4oKoEa3Ro9llC/.og/at2.uheWG/igi', 'Demo Manager');

@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, request
 from api_services import generate_sign_in_url, get_token_from_code, get_user_profile_details
 from customfunctions import save_user_details_to_database, check_manager, send_mail_to_members
+from project_constants import dashboard_url
 
 
 def _force_https(wsgi_app):
@@ -41,7 +42,7 @@ def end_emp():
 
 @app.route('/end_man/')
 def end_man():
-    return render_template('end_man.html')
+    return render_template('end_man.html', dashboard_url=dashboard_url)
 
 
 @app.errorhandler(404)

@@ -14,8 +14,8 @@ else
 }
 if($_SERVER["REQUEST_METHOD"] == "POST")
 {
-	$sql = "SELECT proj_name from wf_projects where status = 1 AND proj_mgr = '".$projMgr."'";
-	$res = mysqli_query($link, $sql);
+	$sql = "SELECT proj_name from wf_projects where status = 1 AND proj_mgr = ?";
+	$res = wf_query($link, $sql, array($projMgr));
 	if (mysqli_num_rows($res) > 0) 
 	{
 		echo "only 1 project can be active at a time";

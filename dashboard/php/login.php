@@ -1,6 +1,7 @@
 <?php
 	// Checking if user is already logged in then redirect to home page
 require_once 'config.php';
+session_start();
 if(isset($_SESSION['email']) || !empty($_SESSION['email'])) 
 {
 	header("location: ../home.php");
@@ -12,7 +13,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 	$username = $username_err = "";
 	$password = $password_err = "";
 	$name ="";
-	$sql="select * from wf_users where username = '$username'";
 
 	if(empty(trim($_POST["email"]))) 
 	{
@@ -52,7 +52,6 @@ if($_SERVER["REQUEST_METHOD"] == "POST")
 					{
 						if(password_verify($password, $hashed_password))
 						{
-							session_start();
 							$_SESSION['email'] = $username;
 							$_SESSION['name'] = $name;
 							echo "success";

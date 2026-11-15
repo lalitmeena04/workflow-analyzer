@@ -46,4 +46,7 @@ employee_scopes = [
     'Calendars.Read',
     ]
 
-employee_consent_link = 'https://cs78827.azurewebsites.net/emp_consent'
+consent_url = os.environ.get('WFA_CONSENT_URL', 'http://localhost:5000').rstrip('/')
+dashboard_url = os.environ.get('WFA_DASHBOARD_URL', 'http://localhost:8000').rstrip('/')
+
+employee_consent_link = consent_url + '/emp_consent/'
