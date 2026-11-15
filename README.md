@@ -4,7 +4,9 @@ A project-tracking web app that watches the e-mail your team already writes. Bui
 
 Managers sign up, register a project with its modules and deadlines, and enroll their team. The backend then reads the project's Outlook mail through the Microsoft Graph API, runs sentiment analysis and date extraction over it with NLTK and spaCy, and turns "the NLP module will be three days late" into a progress number — no manual status reports. The dashboard shows expected vs. actual progress as interactive Vue + ApexCharts reports.
 
-![Dashboard report with progress line chart and per-module radial chart](docs/screenshots/2.png)
+![Dashboard report with progress line chart and per-module radial chart](docs/screenshots/dashboard.png)
+
+*The dashboard running against the demo data in `database/seed.sql`.*
 
 ## How it works
 
@@ -25,7 +27,7 @@ database/    MySQL schema shared by both, plus optional demo data
 
 ## Running it
 
-Requirements: PHP 7 with mysqli, MySQL 5.7, Python 3.7 (the pinned `backend/requirements.txt` predates later Pythons).
+Requirements: PHP 7.4 or 8 with mysqli, MySQL 5.7, Python 3.7 (the pinned `backend/requirements.txt` predates later Pythons). The dashboard was last checked on PHP 7.4.33 and 8.3.36 against MySQL 5.7.44.
 
 ```sh
 mysql -u root -p -e "CREATE DATABASE workflow_analyzer"
@@ -43,9 +45,11 @@ flask run          # consent web app
 python backend.py  # mail-processing pipeline
 ```
 
-Configuration comes from environment variables — see [`.env.example`](.env.example). The Graph integration needs a Microsoft app registration (client ID + secret). With the demo seed loaded you can log in as `demo@example.com` / `password` and see the charts without any Outlook setup.
+Configuration comes from environment variables — see [`.env.example`](.env.example). The Graph integration needs a Microsoft app registration (client ID + secret). `WFA_CONSENT_URL` and `WFA_DASHBOARD_URL` are the public base URLs of the Flask consent app and the dashboard, which link to each other; they default to `http://localhost:5000` and `http://localhost:8000`. With the demo seed loaded you can log in as `demo@example.com` / `password` and see the charts without any Outlook setup.
 
 ## Screenshots
+
+Device mockups from the 2019 project submission:
 
 | | |
 | --- | --- |
@@ -55,8 +59,8 @@ Configuration comes from environment variables — see [`.env.example`](.env.exa
 ## Team Code Reapers
 
 - [Nishank Singh Sisodiya](https://github.com/nishanksisodiya)
-- [Lalit Kumar Meena](https://github.com/scleaverzer0ne)
-- [Abhinav Karn](https://github.com/iamabhinavkarn)
+- [Lalit Kumar Meena](https://github.com/lalitmeena04)
+- Abhinav Karn
 - [Mohit Mourya](https://github.com/mohitmourya)
 - [Daljeet Singh Chhabra](https://github.com/idaljeetsingh)
 
@@ -67,4 +71,5 @@ This repo was reconstructed from the 2019 project archive for preservation:
 - Database and Microsoft app credentials were replaced with environment variables; the original secrets are not in the history.
 - Captured mailboxes and personal data from the original deployment are excluded; `database/seed.sql` contains only anonymised demo data.
 - The bundled Font Awesome 5 Pro, Google Sans and Raisonne fonts were removed because they cannot be redistributed. Icons use Font Awesome Free 5.15.4 and text falls back to the system sans-serif stack, so the look differs slightly from the 2019 screenshots.
-- Everything else — including the college-years code style — is as submitted.
+- A handful of bugs were fixed after the import so the dashboard runs on a stock setup: dashboard queries are parameterised instead of concatenated, sessions start before they are read, the hardcoded Azure URLs became `WFA_CONSENT_URL` / `WFA_DASHBOARD_URL`, the dashboard and the demo seed set the non-strict `sql_mode` the schema depends on, and the backend modules no longer run on import (`python backend.py` drives the pipeline).
+- Everything else — including the college-years code style — is as submitted. The backend has not been re-run since 2019: it still builds its SQL with string formatting, `mailsentimentanalysis.py` expects a `book.csv` that is not in the project archive, and `nlp_script.py` leans on a `datefinder` monkey-patch and 2019-era pandas behaviour.
