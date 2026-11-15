@@ -14,7 +14,7 @@
 	<title>Workflow Analyzer</title>
 	<link rel="icon" type="image/png" href="res/img/favicon.png" />
 	<link rel="stylesheet" type="text/css" href="res/css/style.min.css">
-	<link rel="stylesheet" type="text/css" href="res/css/font-awesome/all.min.css">
+	<link rel="stylesheet" type="text/css" href="res/fontawesome-free/css/all.min.css">
 	<link rel="stylesheet" type="text/css" href="res/css/bootstrap/bootstrap.min.css">
 	<script type="text/javascript" src="res/script/jQuery/jquery-3.3.1.min.js"></script>
 	<script type="text/javascript" src="res/script/index.min.js"></script>
@@ -46,8 +46,8 @@
 			<ul class="navbar-nav mr-auto">
 			</ul>
 			<div class="btn-group">
-				<button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#loginModal"><i class="fal fa-sign-in" aria-hidden="true"></i>  Login</button>
-				<button class="btn btn-outline-info my-1 my-sm-0" data-toggle="modal" data-target="#signupModal"><i class="fal fa-user-plus" aria-hidden="true"></i>  Sign up</button>
+				<button class="btn btn-outline-success my-2 my-sm-0" data-toggle="modal" data-target="#loginModal"><i class="fas fa-sign-in-alt" aria-hidden="true"></i>  Login</button>
+				<button class="btn btn-outline-info my-1 my-sm-0" data-toggle="modal" data-target="#signupModal"><i class="fas fa-user-plus" aria-hidden="true"></i>  Sign up</button>
 			</div>
 		</div>
 	</nav>
@@ -58,7 +58,7 @@
 			<p id="title-details" data-scroll-speed="-1.65" style="font-size: 30px">Take Control Of Your Workflow</p>
 		</div>
 		<div id="down" onclick="window.location='#1';">
-			<i class="fal fa-angle-double-down fa-2x" aria-hidden="true"></i>
+			<i class="fas fa-angle-double-down fa-2x" aria-hidden="true"></i>
 		</div>
 	</div>
 	<div class="info-box" id="1">
@@ -72,7 +72,7 @@
 		</div>
 	</div>
 	<div id="totop" onclick="window.location='#top';">
-		<i class="fal fa-angle-double-up fa-2x"></i>
+		<i class="fas fa-angle-double-up fa-2x"></i>
 	</div>
 
 	<div style="overflow-y: auto;" class="modal fade" id="loginModal">

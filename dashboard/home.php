@@ -70,7 +70,7 @@ $ovr_d = json_encode($ovr_date);
 	<title>Workflow Analyzer home</title>
 	<link rel="icon" type="image/png" href="res/img/favicon.png" />
 	<link rel="stylesheet" type="text/css" href="res/css/style.min.css">
-	<link rel="stylesheet" type="text/css" href="res/css/font-awesome/all.min.css">
+	<link rel="stylesheet" type="text/css" href="res/fontawesome-free/css/all.min.css">
 	<link rel="stylesheet" type="text/css" href="res/css/bootstrap/bootstrap.min.css">
 	<link rel="stylesheet" type="text/css" href="res/css/bootstrap/bootstrap-datepicker.min.css">
 	<script type="text/javascript" src="res/script/jQuery/jquery-3.3.1.min.js"></script>
@@ -159,7 +159,7 @@ $ovr_d = json_encode($ovr_date);
 			</ul>
 			<span class="navbar-text"><i class="fas fa-project-diagram"></i>&nbsp;<?php echo $proj_name;?>&nbsp;&nbsp;&nbsp;</span>
 			<span class="navbar-text"><i class="fas fa-user"></i>&nbsp;<?php echo $user; ?>&nbsp;&nbsp;</span>
-			<button class="btn btn-sm btn-outline-danger my-1 my-sm-0" onclick="location.href = 'php/signout.php'"><i class="fal fa-sign-out"></i>  Sign out</button>
+			<button class="btn btn-sm btn-outline-danger my-1 my-sm-0" onclick="location.href = 'php/signout.php'"><i class="fas fa-sign-out-alt"></i>  Sign out</button>
 		</div>
 	</nav>
 
@@ -272,7 +272,7 @@ $ovr_d = json_encode($ovr_date);
 						<div class="input-group date" data-provide="datepicker">
 							<input type="text" name="startDate" class="form-control" readonly="">
 							<div class="input-group-append">
-								<a href="#" class="btn btn-dark disabled"><i class="fal fa-calendar-plus"></i></a>
+								<a href="#" class="btn btn-dark disabled"><i class="far fa-calendar-plus"></i></a>
 							</div>
 						</div>
 						<br>
@@ -280,7 +280,7 @@ $ovr_d = json_encode($ovr_date);
 						<div class="input-group date" data-provide="datepicker">
 							<input type="text" name="deadline" class="form-control" readonly="">
 							<div class="input-group-append">
-								<a href="#" class="btn btn-dark disabled"><i class="fal fa-calendar-plus"></i></a>
+								<a href="#" class="btn btn-dark disabled"><i class="far fa-calendar-plus"></i></a>
 							</div>
 						</div>
 						<br>
@@ -288,7 +288,7 @@ $ovr_d = json_encode($ovr_date);
 						<div class="input-group">
 							<input class="form-control" id="modulecount" type="text" name="noOfModules" placeholder="No. of modules">
 							<div class="input-group-append">
-								<span class="btn btn-outline-success" onclick="addField();"><i class="far fa-check"></i></span>
+								<span class="btn btn-outline-success" onclick="addField();"><i class="fas fa-check"></i></span>
 							</div>
 						</div>
 						<div id="moduleNames"></div>
@@ -297,7 +297,7 @@ $ovr_d = json_encode($ovr_date);
 
 				<!-- Modal footer -->
 				<div class="modal-footer">
-					<button type="button" class="btn btn-success" id="add-proj"><i class="fal fa-folder-plus"></i>&nbsp;ADD</button>
+					<button type="button" class="btn btn-success" id="add-proj"><i class="fas fa-folder-plus"></i>&nbsp;ADD</button>
 				</div>
 
 			</div>
@@ -331,7 +331,7 @@ $ovr_d = json_encode($ovr_date);
 				<!-- Modal footer -->
 				<div class="modal-footer">
 					<button class="btn btn-warning" id="add" type="add"><i class="fas fa-user-plus"></i></button>
-					<button type="button" class="btn btn-success" id="addStaff"><i class="fal fa-users-medical"></i>&nbsp;&nbsp;ADD</button>
+					<button type="button" class="btn btn-success" id="addStaff"><i class="fas fa-users"></i>&nbsp;&nbsp;ADD</button>
 				</div>
 
 			</div>
@@ -484,7 +484,7 @@ $ovr_d = json_encode($ovr_date);
 			var x = document.getElementById("modulecount").value;
 			for (var i = 1; i <= x; i++) 
 			{
-				$("#moduleNames").append('<br><label>Module '+i+' name</label><input class="form-control" type="text" name="moduleName[]" placeholder="Module '+i+'"><div class="input-group"><div class="input-group date w-50" data-provide="datepicker"><input type="text" name="moduleStartDate[]" class="form-control" readonly="" placeholder="Start Date"><div class="input-group-append"><a href="#" class="btn btn-dark disabled"><i class="fal fa-calendar-plus"></i></a></div></div><div class="input-group date w-50" data-provide="datepicker"><input type="text" name="moduleDeadline[]" class="form-control" readonly="" placeholder="Deadline"><div class="input-group-append"><a href="#" class="btn btn-dark disabled"><i class="fal fa-calendar-plus"></i></a></div></div></div>')
+				$("#moduleNames").append('<br><label>Module '+i+' name</label><input class="form-control" type="text" name="moduleName[]" placeholder="Module '+i+'"><div class="input-group"><div class="input-group date w-50" data-provide="datepicker"><input type="text" name="moduleStartDate[]" class="form-control" readonly="" placeholder="Start Date"><div class="input-group-append"><a href="#" class="btn btn-dark disabled"><i class="far fa-calendar-plus"></i></a></div></div><div class="input-group date w-50" data-provide="datepicker"><input type="text" name="moduleDeadline[]" class="form-control" readonly="" placeholder="Deadline"><div class="input-group-append"><a href="#" class="btn btn-dark disabled"><i class="far fa-calendar-plus"></i></a></div></div></div>')
 			}
 		}
 		function open_proj(proj)

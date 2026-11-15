@@ -1,37 +1,5 @@
-@font-face {
-	font-family: 'raisonne';
-	src: url('../webfonts/raisonne-demibold.ttf')  format('truetype');
-}
-
-@font-face {
-	font-family: 'google sans regular';
-	src: url('../webfonts/google-sans/GoogleSans-Regular.ttf')  format('truetype');
-}
-
-@font-face {
-	font-family: 'google sans bold';
-	src: url('../webfonts/google-sans/GoogleSans-Bold.ttf')  format('truetype');
-}
-
-@font-face {
-	font-family: 'google sans italic';
-	src: url('../webfonts/google-sans/GoogleSans-Italic.ttf')  format('truetype');
-}
-
-@font-face {
-	font-family: 'google sans bolditalic';
-	src: url('../webfonts/google-sans/GoogleSans-BoldItalic.ttf')  format('truetype');
-}
-
-@font-face {
-	font-family: 'google sans medium';
-	src: url('../webfonts/google-sans/GoogleSans-Medium.ttf')  format('truetype');
-}
-
-@font-face {
-	font-family: 'google sans mediumitalic';
-	src: url('../webfonts/google-sans/GoogleSans-MediumItalic.ttf')  format('truetype');
-}
+/* The original design used the Raisonne and Google Sans typefaces, which cannot be redistributed.
+   The corresponding font-family rules now fall back to the system sans-serif stack. */
 
 html
 {
@@ -286,7 +254,7 @@ a { color: inherit; }
 .email-max
 {
 	text-align: left;
-	font-family: google sans regular
+	font-family: 'google sans regular', sans-serif
 }
 
 #email-container
